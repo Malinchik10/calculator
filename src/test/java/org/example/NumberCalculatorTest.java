@@ -1,65 +1,84 @@
 package org.example;
 
-import junit.framework.TestCase;
 
-import static org.junit.Assert.assertThrows;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-public class NumberCalculatorTest extends TestCase {
-    private final NumberCalculator calculator;
+public class NumberCalculatorTest {
+    private static NumberCalculator calculator;
 
-    public NumberCalculatorTest(String testName )
-    {
-        super( testName );
+    @BeforeAll
+    static void setup(){
         calculator = new NumberCalculator();
     }
 
+    @Tag("DEV")
+    @Test
     public void testAddingPositiveNumbers() {
         Number actual = calculator.add(1, 2);
-        assertEquals( 3, actual.intValue());
+        Assertions.assertEquals(3, actual.intValue());
     }
 
+    @Tag("DEV")
+    @Test
     public void testAddingNegativeNumbers() {
         Number actual = calculator.add(-1, 2);
-        assertEquals(1, actual.intValue());
+        Assertions.assertEquals(1, actual.intValue());
     }
 
+    @Tag("DEV")
+    @Test
     public void testSubtractingPositiveNumbers() {
         Number actual = calculator.subtract(1, 2);
-        assertEquals(-1, actual.intValue());
+        Assertions.assertEquals(-1, actual.intValue());
     }
 
+    @Tag("DEV")
+    @Test
     public void testSubtractingNegativeNumbers() {
         Number actual = calculator.subtract(-1, -2);
-        assertEquals(1, actual.intValue());
+        Assertions.assertEquals(1, actual.intValue());
     }
 
+    @Tag("DEV")
+    @Test
     public void testMultiplyingPositiveNumbers() {
         Number actual = calculator.multiply(2, 10);
-        assertEquals(20, actual.intValue());
+        Assertions.assertEquals(20, actual.intValue());
     }
 
+    @Tag("DEV")
+    @Test
     public void testMultiplyingNegativeNumbers() {
         Number actual = calculator.multiply(-10, 2);
-        assertEquals(-20, actual.intValue());
+        Assertions.assertEquals(-20, actual.intValue());
     }
 
+    @Tag("DEV")
+    @Test
     public void testDividingPositiveNumbers() {
         Number actual = calculator.divide(1.0, 2.0);
-        assertEquals(0.5, actual.doubleValue(), 0.001);
+        Assertions.assertEquals(0.5, actual.doubleValue(), 0.001);
     }
 
+    @Tag("DEV")
+    @Test
     public void testDividingNegativeNumbers() {
         Number actual = calculator.divide(-1, 2);
-        assertEquals(-0.5, actual.doubleValue(), 0.001);
+        Assertions.assertEquals(-0.5, actual.doubleValue(), 0.001);
     }
 
+    @Tag("DEV")
+    @Test
     public void testDividingZeroShouldThrowException() {
-        Exception exception = assertThrows(ArithmeticException.class, () -> {
+        Exception exception = Assertions.assertThrows(ArithmeticException.class, () -> {
             calculator.divide(-1, 0);
         });
         String expectedMessage = "Divide by zero";
         String actualMessage = exception.getMessage();
 
-        assertTrue(actualMessage.contains(expectedMessage));
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
     }
 }
